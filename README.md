@@ -69,7 +69,7 @@ mboa-market-serveur/
 Il faut un serveur Ubuntu 24.04, un compte avec `sudo`, et le code livré par l'équipe de développement dans `/srv/mboamarket` : le site dans `site/`, l'API dans `stock/`.
 
 ```bash
-git clone git@github.com:<ton-compte>/mboa-market-serveur.git
+git clone git@github.com:<https://github.com/sambabath7607>/mboa-market-serveur.git
 cd mboa-market-serveur
 
 # Le dossier du site, pour l'équipe web
