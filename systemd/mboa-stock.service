@@ -1,0 +1,14 @@
+[Unit]
+   Description=API du stock de Mboa Market
+   After=network.target
+
+   [Service]
+   User=stock
+   Group=stock
+   ExecStart=/usr/bin/python3 /srv/mboamarket/stock/stock.py
+   Restart=on-failure
+   
+   Environment=STOCK_FICHIER=/srv/mboamarket/stock/stock.csv
+
+   [Install]
+   WantedBy=multi-user.target

@@ -1,0 +1,20 @@
+
+   server {
+       listen 80 default_server;
+       server_name _;
+
+       root /srv/mboamarket/site;
+       index index.html;
+
+       access_log /var/log/nginx/mboamarket.access.log;
+       error_log  /var/log/nginx/mboamarket.error.log;
+
+       location / {
+           try_files $uri $uri/ =404;
+       }
+  
+		location /api/ {
+           proxy_pass http://127.0.0.1:8090/;
+       }
+	 }
+
