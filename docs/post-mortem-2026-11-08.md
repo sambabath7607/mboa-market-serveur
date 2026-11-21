@@ -1,4 +1,4 @@
-# Incident : <à compléter : ce que les clients ont vu>
+# Incident : 502  et 403 
 ## Impact
 Les clients ont vu une erreur 403 Forbidden : les pages de la boutique ne s'affichaient pas.
 Ils ont aussi vu une erreur 502 Bad Gateway : le stock des produits était indisponible.
@@ -14,20 +14,12 @@ Ils ont aussi vu une erreur 502 Bad Gateway : le stock des produits était indis
 
 ## Chronologie
 
-<à compléter : l'heure de la publication, des symptômes, de chaque commande de diagnostic et de chaque correction. Une ligne par événement, par exemple : « - 17:16 publication de la version de novembre ».>
-
-
 - Symptôme : curl -I http://localhost/api/stock renvoie 502 Bad Gateway.
 - Diagnostic : lecture des notes de version de Koffi (NOTES-VERSION.md) : la nouvelle API lit le stock dans un fichier indiqué par la variable FICHIER_STOCK, que le service ne fournissait pas.
 - Correction : ajout de Environment=FICHIER_STOCK=<chemin> dans mboa-stock.service, puis daemon-reload, reset-failed et restart.
 - Vérification : curl http://localhost/api/stock renvoie le stock.
 
 ## Causes racines
-
-<à compléter : pour chaque symptôme, le 403 et le 502 : ce que les journaux ont montré, et ce qui a rendu l'erreur possible.>
-
-## Causes racines
-
 **403 Forbidden sur la page des promotions**
 - Ce que les journaux ont montré : mboamarket.error.log affichait « Permission denied »
   sur les nouveaux fichiers (promo.html et son affiche).
@@ -42,12 +34,9 @@ Ils ont aussi vu une erreur 502 Bad Gateway : le stock des produits était indis
   variable FICHIER_STOCK, annoncée dans les notes de version de Koffi. L'unité
   systemd ne la fournissait pas, et rien ne vérifiait les notes de version avant
   la publication.
+
+
 ## Correction
-
-
-<à compléter : ce qui a été changé, exactement : les commandes.>
-## Correction
-
 **403**
 - Droits des nouveaux fichiers corrigés : lisibles par tous, modifiables par le groupe web.
   sudo chmod 664 /srv/mboamarket/site/promo.html <l'affiche>
@@ -65,10 +54,6 @@ Ils ont aussi vu une erreur 502 Bad Gateway : le stock des produits était indis
 
 
 ## Pour que ça ne revienne pas
-
-<à compléter : les actions, chacune avec un responsable.>
-## Pour que ça ne revienne pas
-
 - Garder umask 002 dans mboa-publier, et tester chaque publication avec
   sudo mboa-publier --essai avant de publier. Responsable : équipe DevOps.
 - Avant chaque publication, lire les notes de version et appliquer les changements
